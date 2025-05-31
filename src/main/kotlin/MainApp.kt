@@ -1,33 +1,32 @@
 package viewer
 
+import java.io.File
+
+import LeftPane
+import RightPane
 import javafx.application.Application
 import javafx.scene.Scene
-import javafx.scene.control.Alert
-import javafx.scene.control.Button
-import javafx.scene.layout.StackPane
+import javafx.scene.layout.BorderPane
+import javafx.scene.layout.HBox
 import javafx.stage.Stage
 
 class MainApp : Application() {
-    override fun start(stage: Stage) {
+    override fun start(primaryStage: Stage) {
+        val rightPane = RightPane()
+        val leftPane = LeftPane(primaryStage)
 
-        println("Hallo")
-
-        val button = Button("Klick mich!")
-
-        button.setOnAction {
-            val alert = Alert(Alert.AlertType.INFORMATION)
-            alert.title = "Hallo!"
-            alert.headerText = null
-            alert.contentText = "Du hast den Button gedrückt."
-            alert.showAndWait()
+        val hBox = HBox(leftPane, rightPane).apply {
+            HBox.setHgrow(rightPane, javafx.scene.layout.Priority.ALWAYS)
         }
 
-        val root = StackPane(button)
-        val scene = Scene(root, 400.0, 200.0)
+        val root = BorderPane().apply {
+            center = hBox
+        }
 
-        stage.title = "ImageViewer (Kotlin FX)"
-        stage.scene = scene
-        stage.show()
+        val scene = Scene(root, 1000.0, 600.0)
+        primaryStage.title = "Das ist das Haus vom Nikolaus"
+        primaryStage.scene = scene
+        primaryStage.show()
     }
 }
 
