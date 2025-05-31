@@ -25,7 +25,7 @@ class MainApp : Application() {
         val root = StackPane(button)
         val scene = Scene(root, 400.0, 200.0)
 
-        stage.title = "Nostalgie Viewer (Kotlin FX)"
+        stage.title = "ImageViewer (Kotlin FX)"
         stage.scene = scene
         stage.show()
     }
